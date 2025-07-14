@@ -33,4 +33,4 @@ create table Easame(
 insert into
     studente(matricola, nome, cognome, nascita, cf)
 values
-    (1, 'Alice', 'Bianchi', '09-08-2002', 'AAABBB02G09H501L')
+    (1, 'Alice', 'Bianchi', '09-08-2002', 'AAABBB02G09H501L');
