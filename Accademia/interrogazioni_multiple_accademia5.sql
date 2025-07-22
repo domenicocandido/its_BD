@@ -34,6 +34,7 @@ join WP w
 on w.progetto = ap.progetto
 
 where pj.nome = 'Pegasus' and posizione in ('Ricercatore', 'Professore Associato', 'Professore Ordinario')
+group by p.cognome having(count(w.progetto) > 1)
 order by cognome desc;
 
 
@@ -147,7 +148,7 @@ where ap.giorno = a.giorno and posizione in ('Ricercatore', 'Professore Associat
 
 select nome
 
-from WP
+from WP 
 
 group by nome
 having count(distinct progetto) > 1; 
