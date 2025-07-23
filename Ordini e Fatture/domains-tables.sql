@@ -1,3 +1,7 @@
+begin transaction;
+
+set constraints all deferred;
+
 CREATE DOMAIN RealGEZ as real
     check (value >= 0);
 
@@ -38,7 +42,7 @@ CREATE TABLE Regione(
     primary key (nome),
 
     foreign key (nazione)
-        references Nazione(nome),
+        references Nazione(nome) deferrable,
     
     unique(nome, nazione)
 
@@ -52,7 +56,7 @@ CREATE TABLE Citta(
     primary key(id),
 
     foreign key (regione)
-        references Regione(nome),
+        references Regione(nome) deferrable,
 
     unique(nome, regione)
 );
@@ -68,7 +72,7 @@ CREATE TABLE Direttore(
     primary key (cf),
 
     foreign key (citta)
-        references Citta(id)
+        references Citta(id) deferrable
 
 );
 
@@ -81,10 +85,10 @@ CREATE TABLE Dipartimento(
     primary key(nome),
 
     foreign key (direttore)
-        references Direttore(cf),
+        references Direttore(cf) deferrable,
 
     foreign key (citta)
-        references Citta(id)
+        references Citta(id) deferrable
 
 );
 
@@ -106,7 +110,7 @@ CREATE TABLE Fornitore(
     primary key (partita_iva),
 
     foreign key (citta)
-        references Citta(id)
+        references Citta(id) deferrable
 );
 
 CREATE TABLE Ordine(
@@ -122,12 +126,14 @@ CREATE TABLE Ordine(
     primary key (id),
 
     foreign key (dipartimento)
-        references Dipartimento(nome),
+        references Dipartimento(nome) deferrable,
 
     foreign key (statoOrdine)
-        references StatoOrdine(id),
+        references StatoOrdine(id) deferrable,
 
     foreign key (fornitore)
-        references Fornitore(partita_iva)
+        references Fornitore(partita_iva) deferrable
 
 );
+
+commit;
