@@ -126,13 +126,13 @@ CREATE TABLE Ordine(
     primary key (id),
 
     foreign key (dipartimento)
-        references Dipartimento(nome) deferrable,
+        references Dipartimento(nome),
 
     foreign key (statoOrdine)
-        references StatoOrdine(id) deferrable,
+        references StatoOrdine(id),
 
     foreign key (fornitore)
-        references Fornitore(partita_iva) deferrable
+        references Fornitore(partita_iva)
 
 );
 
